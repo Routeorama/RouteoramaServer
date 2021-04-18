@@ -1,5 +1,7 @@
 package com.example.routeoramaserver.controllers;
 
+import com.example.routeoramaserver.networking.Connection;
+import com.example.routeoramaserver.networking.IConnection;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -8,6 +10,8 @@ public class TestController {
 
     @GetMapping("/api/test")
     public String Get(){
-        return "This is a test API call";
+        IConnection connection = new Connection();
+        connection.Start();
+        return connection.FetchData();
     }
 }
