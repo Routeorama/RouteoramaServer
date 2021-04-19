@@ -1,5 +1,6 @@
 package com.example.routeoramaserver.networking;
 
+
 import com.example.routeoramaserver.networking.callbacks.ClientCallback;
 import com.example.routeoramaserver.networking.callbacks.ServerCallback;
 
@@ -8,7 +9,8 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 
-public class Connection implements ClientCallback, IConnection {
+public class ServerImpl implements ClientCallback, IServer {
+
     private ServerCallback server;
 
     @Override
