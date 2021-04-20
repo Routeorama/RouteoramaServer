@@ -11,7 +11,7 @@ import java.rmi.RemoteException;
 @SpringBootApplication
 public class RouteoramaServerApplication {
 
-    public static void main(String[] args) throws MalformedURLException {
+    public static void main(String[] args) {
 
         System.setProperty("java.security.policy", "src\\main\\security.policy");
         if (System.getSecurityManager() == null) {
@@ -19,12 +19,6 @@ public class RouteoramaServerApplication {
         }
         //TODO clean-up and remove testing code
         SpringApplication.run(RouteoramaServerApplication.class, args);
-
-        try {
-            System.out.println(ServerConnection.getServerCallback().getLoginServer().Login("George", "george"));
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
     }
 
 }

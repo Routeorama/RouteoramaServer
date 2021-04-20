@@ -15,11 +15,12 @@ public class LoginController {
 
     public LoginController(){
         loginClient = new LoginClient();
+        loginClient.Start();
     }
 
     @PostMapping(value = "/login", consumes = "application/json", produces = "application/json")
-    public User Login(@RequestBody String username, @RequestBody String password){
-        return loginClient.Login(username, password);
+    public User Login(@RequestBody User user){
+        return loginClient.Login(user.getUsername(), user.getPassword());
     }
 
     // ask about the use of a session ID
