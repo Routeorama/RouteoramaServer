@@ -1,0 +1,32 @@
+package com.example.routeoramaserver.controllers.login;
+
+import com.example.routeoramaserver.controllers.login.server.ILoginClient;
+import com.example.routeoramaserver.controllers.login.server.LoginClient;
+import com.example.routeoramaserver.models.User;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/auth")
+public class LoginController {
+    private ILoginClient loginClient;
+
+    public LoginController(){
+        loginClient = new LoginClient();
+    }
+
+    @PostMapping(value = "/login", produces = "application/json")
+    public User Login(@RequestBody String username, @RequestBody String password){
+        return loginClient.Login(username, password);
+    }
+
+    // ask about the use of a session ID
+    // safer than sending the data directly
+    // can be used for anything auth related after first log-in
+    @PostMapping("/logout")
+    public void Logout(){
+        loginClient.Logout();
+    }
+}
