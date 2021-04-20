@@ -17,7 +17,7 @@ public class LoginController {
         loginClient = new LoginClient();
     }
 
-    @PostMapping(value = "/login", produces = "application/json")
+    @PostMapping(value = "/login", consumes = "application/json", produces = "application/json")
     public User Login(@RequestBody String username, @RequestBody String password){
         return loginClient.Login(username, password);
     }

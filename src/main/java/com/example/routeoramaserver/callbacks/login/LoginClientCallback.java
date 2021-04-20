@@ -1,4 +1,4 @@
-package com.example.routeoramaserver.controllers.login.rmi.callbacks;
+package com.example.routeoramaserver.callbacks.login;
 
 import java.rmi.Remote;
 

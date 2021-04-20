@@ -1,7 +1,7 @@
 package com.example.routeoramaserver.controllers.login.rmi;
 
-import com.example.routeoramaserver.controllers.login.rmi.callbacks.LoginClientCallback;
-import com.example.routeoramaserver.controllers.login.rmi.callbacks.LoginServerCallback;
+import com.example.routeoramaserver.callbacks.login.LoginClientCallback;
+import com.example.routeoramaserver.callbacks.login.LoginServerCallback;
 import com.example.routeoramaserver.models.User;
 import com.example.routeoramaserver.networking.ServerConnection;
 
