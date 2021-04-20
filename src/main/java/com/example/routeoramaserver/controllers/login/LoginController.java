@@ -1,7 +1,7 @@
 package com.example.routeoramaserver.controllers.login;
 
-import com.example.routeoramaserver.controllers.login.server.ILoginClient;
-import com.example.routeoramaserver.controllers.login.server.LoginClient;
+import com.example.routeoramaserver.controllers.login.rmi.ILoginClient;
+import com.example.routeoramaserver.controllers.login.rmi.LoginClient;
 import com.example.routeoramaserver.models.User;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

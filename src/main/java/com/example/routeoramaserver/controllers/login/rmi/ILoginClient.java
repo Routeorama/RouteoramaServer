@@ -1,4 +1,4 @@
-package com.example.routeoramaserver.controllers.login.server;
+package com.example.routeoramaserver.controllers.login.rmi;
 
 import com.example.routeoramaserver.models.User;
 
