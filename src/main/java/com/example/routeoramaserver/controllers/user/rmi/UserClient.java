@@ -1,7 +1,7 @@
-package com.example.routeoramaserver.controllers.login.rmi;
+package com.example.routeoramaserver.controllers.user.rmi;
 
-import com.example.routeoramaserver.callbacks.login.LoginClientCallback;
-import com.example.routeoramaserver.callbacks.login.LoginServerCallback;
+import com.example.routeoramaserver.callbacks.user.UserClientCallback;
+import com.example.routeoramaserver.callbacks.user.UserServerCallback;
 import com.example.routeoramaserver.models.User;
 import com.example.routeoramaserver.networking.ServerConnection;
 
@@ -12,15 +12,15 @@ import java.rmi.server.UnicastRemoteObject;
 * Login client used to handle auth requests to and from the DB server
 * can later be changed to handle registering and account state as well (deleting and such)
 * */
-public class LoginClient implements ILoginClient, LoginClientCallback {
+public class UserClient implements IUserClient, UserClientCallback {
 
-    private LoginServerCallback server;
+    private UserServerCallback server;
 
     @Override
     public void Start() {
         try {
             UnicastRemoteObject.exportObject(this, 0);
-            server = ServerConnection.getServerCallback().getLoginServer();
+            server = ServerConnection.getServerCallback().getUserServer();
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -43,5 +43,15 @@ public class LoginClient implements ILoginClient, LoginClientCallback {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean Register(User user) {
+        try {
+            return server.Register(user);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

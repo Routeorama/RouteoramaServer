@@ -1,12 +1,7 @@
 package com.example.routeoramaserver;
 
-import com.example.routeoramaserver.controllers.login.rmi.ILoginClient;
-import com.example.routeoramaserver.networking.ServerConnection;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.net.MalformedURLException;
-import java.rmi.RemoteException;
 
 @SpringBootApplication
 public class RouteoramaServerApplication {

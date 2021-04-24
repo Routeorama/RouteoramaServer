@@ -1,4 +1,4 @@
-package com.example.routeoramaserver.callbacks.login;
+package com.example.routeoramaserver.callbacks.user;
 
 import java.rmi.Remote;
 
@@ -7,5 +7,5 @@ import java.rmi.Remote;
 * instead of sync waiting for a return to finish, use another method that gets called remotely by the DB server
 * send any data necessary as an argument
 * */
-public interface LoginClientCallback extends Remote {
+public interface UserClientCallback extends Remote {
 }
