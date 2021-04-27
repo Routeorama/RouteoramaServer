@@ -3,10 +3,13 @@ package com.example.routeoramaserver.controllers.place;
 import com.example.routeoramaserver.controllers.place.rmi.IPlaceClient;
 import com.example.routeoramaserver.controllers.place.rmi.PlaceClient;
 import com.example.routeoramaserver.models.Place;
-import com.example.routeoramaserver.models.User;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
+@RequestMapping("/auth")
 public class PlaceController {
     private IPlaceClient placeClient;
 

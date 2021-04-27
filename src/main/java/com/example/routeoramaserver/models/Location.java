@@ -4,15 +4,19 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Location implements Serializable {
-    private double x, Y;
-    private String Country;
-    private String City;
+    private static final long serialVersionUID = 6529685098267757692L;
+    private double x, y;
+    private String country;
+    private String city;
+
+    public Location() {
+    }
 
     public Location(double x, double y, String country, String city) {
         this.x = x;
-        Y = y;
-        Country = country;
-        City = city;
+        this.y = y;
+        this.country = country;
+        this.city = city;
     }
 
     public double getX() {
@@ -24,49 +28,50 @@ public class Location implements Serializable {
     }
 
     public double getY() {
-        return Y;
+        return y;
     }
 
     public void setY(double y) {
-        Y = y;
+        this.y = y;
     }
 
     public String getCountry() {
-        return Country;
+        return country;
     }
 
     public void setCountry(String country) {
-        Country = country;
+        this.country = country;
     }
 
     public String getCity() {
-        return City;
+        return city;
     }
 
     public void setCity(String city) {
-        City = city;
+        this.city = city;
     }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Location location = (Location) o;
-        return Double.compare(location.x, x) == 0 && Double.compare(location.Y, Y) == 0 && Country.equals(location.Country) && City.equals(location.City);
+        return Double.compare(location.x, x) == 0 && Double.compare(location.y, y) == 0 && Objects.equals(country, location.country) && Objects.equals(city, location.city);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(x, Y, Country, City);
+        return Objects.hash(x, y, country, city);
     }
 
     @Override
     public String toString() {
         return "Location{" +
                 "x=" + x +
-                ", Y=" + Y +
-                ", Country='" + Country + '\'' +
-                ", City='" + City + '\'' +
+                ", y=" + y +
+                ", country='" + country + '\'' +
+                ", city='" + city + '\'' +
                 '}';
     }
 }

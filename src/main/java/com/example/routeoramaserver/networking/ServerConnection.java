@@ -13,6 +13,7 @@ public class ServerConnection {
     private static final Lock lock = new ReentrantLock();
 
     private ServerConnection() {
+
     }
 
     /*
