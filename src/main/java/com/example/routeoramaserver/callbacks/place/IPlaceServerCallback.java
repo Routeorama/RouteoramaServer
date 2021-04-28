@@ -8,6 +8,6 @@ import java.rmi.RemoteException;
 /*
  * server interface for RMI
  * */
-public interface PlaceServerCallback extends Remote {
+public interface IPlaceServerCallback extends Remote {
     Place NewPlace(Place place) throws RemoteException;
 }

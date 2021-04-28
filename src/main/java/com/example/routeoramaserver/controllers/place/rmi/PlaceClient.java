@@ -2,11 +2,8 @@ package com.example.routeoramaserver.controllers.place.rmi;
 
 import com.example.routeoramaserver.callbacks.place.PlaceClientCallback;
 import com.example.routeoramaserver.models.Place;
-import com.example.routeoramaserver.callbacks.place.PlaceServerCallback;
-import com.example.routeoramaserver.networking.callbacks.ClientCallback;
+import com.example.routeoramaserver.callbacks.place.IPlaceServerCallback;
 import com.example.routeoramaserver.networking.ServerConnection;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -17,7 +14,7 @@ import java.rmi.server.UnicastRemoteObject;
 * */
 public class PlaceClient implements IPlaceClient, PlaceClientCallback {
 
-    private PlaceServerCallback server;
+    private IPlaceServerCallback server;
 
     @Override
     public void Start() {

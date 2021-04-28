@@ -1,7 +1,7 @@
 package com.example.routeoramaserver.controllers.user.rmi;
 
 import com.example.routeoramaserver.callbacks.user.UserClientCallback;
-import com.example.routeoramaserver.callbacks.user.UserServerCallback;
+import com.example.routeoramaserver.callbacks.user.IUserServerCallback;
 import com.example.routeoramaserver.models.User;
 import com.example.routeoramaserver.networking.ServerConnection;
 
@@ -14,7 +14,7 @@ import java.rmi.server.UnicastRemoteObject;
 * */
 public class UserClient implements IUserClient, UserClientCallback {
 
-    private UserServerCallback server;
+    private IUserServerCallback server;
 
     @Override
     public void Start() {
