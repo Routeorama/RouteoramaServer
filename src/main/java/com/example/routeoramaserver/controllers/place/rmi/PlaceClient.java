@@ -35,4 +35,24 @@ public class PlaceClient implements IPlaceClient, PlaceClientCallback {
         }
         return null;
     }
+
+    @Override
+    public Place GetPlace(String place) {
+        try {
+            return server.GetPlace(place);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Place GetPlace(Double lat, Double lng) {
+        try {
+            return server.GetPlace(lat, lng);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
