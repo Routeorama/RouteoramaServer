@@ -2,6 +2,7 @@ package com.example.routeoramaserver.controllers.place;
 
 import com.example.routeoramaserver.controllers.place.rmi.IPlaceClient;
 import com.example.routeoramaserver.controllers.place.rmi.PlaceClient;
+import com.example.routeoramaserver.models.Location;
 import com.example.routeoramaserver.models.Place;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,7 @@ public class PlaceController {
         return placeClient.NewPlace(place);
     }
 
-    @GetMapping(value = "/place?name={name}", produces = "application/json")
+    @GetMapping(value = "/place/{name}", produces = "application/json")
     public Place GetPlace(@PathVariable("name") String name){
         return placeClient.GetPlace(name);
     }
