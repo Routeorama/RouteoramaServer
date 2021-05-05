@@ -7,6 +7,7 @@ import com.example.routeoramaserver.networking.ServerConnection;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 
 /*
 * Login client used to handle auth requests to and from the DB server
@@ -50,6 +51,16 @@ public class PlaceClient implements IPlaceClient, PlaceClientCallback {
     public Place GetPlace(Double lat, Double lng) {
         try {
             return server.GetPlace(lat, lng);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Place> GetPlacesInBounds(List<Double> bounds) {
+        try {
+            return server.GetPlacesInBounds(bounds);
         } catch (RemoteException e) {
             e.printStackTrace();
         }

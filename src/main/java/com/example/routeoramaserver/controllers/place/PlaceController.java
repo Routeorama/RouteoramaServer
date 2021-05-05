@@ -7,6 +7,7 @@ import com.example.routeoramaserver.models.Place;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/auth")
@@ -31,6 +32,14 @@ public class PlaceController {
     @GetMapping(value = "/place?lat={lat}&lng={lng}", produces = "application/json")
     public Place GetPlace(@PathVariable("lat") Double lat, @PathVariable("lng") Double lng){
         return placeClient.GetPlace(lat, lng);
+    }
+
+    /*
+    Method for fetching a list of places within bounds (for the markers on the client side).
+     */
+    @PostMapping(value = "/place/bounds", consumes = "application/json", produces = "application/json")
+    public List<Place> GetPlacesInBounds(@RequestBody List<Double> bounds){
+        return placeClient.GetPlacesInBounds(bounds);
     }
 
 }

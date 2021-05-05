@@ -12,7 +12,7 @@ public class RouteoramaServerApplication {
         if (System.getSecurityManager() == null) {
             System.setSecurityManager(new SecurityManager());
         }
-        //TODO clean-up and remove testing code
+
         SpringApplication.run(RouteoramaServerApplication.class, args);
     }
 
