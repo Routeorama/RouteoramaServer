@@ -8,6 +8,8 @@ import com.example.routeoramaserver.networking.ServerConnection;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.HashMap;
+import java.util.List;
 
 public class PostClient implements IPostClient, PostClientCallback {
 
@@ -47,6 +49,16 @@ public class PostClient implements IPostClient, PostClientCallback {
     public Post GetPost(int postID) {
         try {
             return server.GetPost(postID);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public HashMap<Boolean, List<Post>> LoadPostsFromChannel(int placeID, int postID) {
+        try {
+            return server.LoadPostsFromChannel(placeID, postID);
         } catch (RemoteException e) {
             e.printStackTrace();
         }

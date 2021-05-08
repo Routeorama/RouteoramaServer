@@ -4,6 +4,9 @@ import com.example.routeoramaserver.controllers.place.post.rmi.PostClient;
 import com.example.routeoramaserver.models.Post;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.List;
+
 @RestController
 @RequestMapping("/post")
 public class PostController {
@@ -23,8 +26,14 @@ public class PostController {
     public boolean DeletePost(@RequestBody int postID){
         return postClient.DeletePost(postID);
     }
+
     @PostMapping(value = "/getpost", consumes = "application/json", produces = "application/json")
     public Post GetPost(@RequestBody int postID){
         return postClient.GetPost(postID);
+    }
+
+    @PostMapping(value = "/getposts", consumes = "application/json", produces = "application/json")
+    public HashMap<Boolean, List<Post>> LoadPostsFromChannel(@RequestBody int placeID, int postID){
+        return postClient.LoadPostsFromChannel(placeID, postID);
     }
 }
