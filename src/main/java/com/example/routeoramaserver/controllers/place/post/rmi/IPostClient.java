@@ -1,6 +1,7 @@
 package com.example.routeoramaserver.controllers.place.post.rmi;
 
 import com.example.routeoramaserver.models.Post;
+import com.example.routeoramaserver.models.PostContainer;
 
 import java.rmi.RemoteException;
 import java.util.HashMap;
@@ -11,5 +12,5 @@ public interface IPostClient {
     Post NewPost(Post post);
     boolean DeletePost(int postID);
     Post GetPost(int postID);
-    HashMap<Boolean, List<Post>> LoadPostsFromChannel(int placeID, int postID);
+    PostContainer LoadPostsFromChannel(int placeID, int postID);
 }

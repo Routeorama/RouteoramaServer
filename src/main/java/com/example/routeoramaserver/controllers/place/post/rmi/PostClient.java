@@ -4,6 +4,7 @@ import com.example.routeoramaserver.callbacks.place.IPlaceServerCallback;
 import com.example.routeoramaserver.callbacks.place.post.IPostServerCallback;
 import com.example.routeoramaserver.callbacks.place.post.PostClientCallback;
 import com.example.routeoramaserver.models.Post;
+import com.example.routeoramaserver.models.PostContainer;
 import com.example.routeoramaserver.networking.ServerConnection;
 
 import java.rmi.RemoteException;
@@ -56,7 +57,7 @@ public class PostClient implements IPostClient, PostClientCallback {
     }
 
     @Override
-    public HashMap<Boolean, List<Post>> LoadPostsFromChannel(int placeID, int postID) {
+    public PostContainer LoadPostsFromChannel(int placeID, int postID) {
         try {
             return server.LoadPostsFromChannel(placeID, postID);
         } catch (RemoteException e) {
