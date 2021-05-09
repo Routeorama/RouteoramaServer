@@ -34,7 +34,7 @@ public class PostController {
     }
 
     @PostMapping(value = "/getposts", consumes = "application/json", produces = "application/json")
-    public PostContainer LoadPostsFromChannel(@RequestBody int placeID, int postID){
-        return postClient.LoadPostsFromChannel(placeID, postID);
+    public PostContainer LoadPostsFromChannel(@RequestBody int[] array){
+        return postClient.LoadPostsFromChannel(array[0], array[1]);
     }
 }
