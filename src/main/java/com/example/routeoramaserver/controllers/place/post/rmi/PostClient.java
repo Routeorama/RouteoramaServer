@@ -1,16 +1,13 @@
 package com.example.routeoramaserver.controllers.place.post.rmi;
 
-import com.example.routeoramaserver.callbacks.place.IPlaceServerCallback;
 import com.example.routeoramaserver.callbacks.place.post.IPostServerCallback;
 import com.example.routeoramaserver.callbacks.place.post.PostClientCallback;
 import com.example.routeoramaserver.models.Post;
 import com.example.routeoramaserver.models.PostContainer;
 import com.example.routeoramaserver.networking.ServerConnection;
-
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.HashMap;
-import java.util.List;
+
 
 public class PostClient implements IPostClient, PostClientCallback {
 
@@ -22,7 +19,7 @@ public class PostClient implements IPostClient, PostClientCallback {
             UnicastRemoteObject.exportObject(this, 0);
             server = ServerConnection.getServerCallback().getPostServer();
         } catch (RemoteException e) {
-            e.printStackTrace();
+            System.out.println("Could not contact server.");
         }
     }
 
@@ -31,7 +28,7 @@ public class PostClient implements IPostClient, PostClientCallback {
         try {
             return server.NewPost(post);
         } catch (RemoteException e) {
-            e.printStackTrace();
+            System.out.println("Could not contact server when creating new post.");
         }
         return null;
     }
@@ -41,7 +38,7 @@ public class PostClient implements IPostClient, PostClientCallback {
         try {
             return server.DeletePost(postID);
         } catch (RemoteException e) {
-            e.printStackTrace();
+            System.out.println("Could not contact server when deleting the post.");
         }
         return false;
     }
@@ -51,7 +48,7 @@ public class PostClient implements IPostClient, PostClientCallback {
         try {
             return server.GetPost(postID);
         } catch (RemoteException e) {
-            e.printStackTrace();
+            System.out.println("Could not contact server when getting post.");
         }
         return null;
     }
@@ -61,7 +58,7 @@ public class PostClient implements IPostClient, PostClientCallback {
         try {
             return server.LoadPostsFromChannel(placeID, postID);
         } catch (RemoteException e) {
-            e.printStackTrace();
+            System.out.println("Could not contact server when loading more posts.");
         }
         return null;
     }

@@ -16,13 +16,9 @@ public class ServerConnection {
 
     }
 
-    /*
-    * this will fetch the server factory which will then provide all of the necessary interfaces for each separate server
-    * there will be one server for one specific thing a.k.a. one for user related things (registering, logging in, etc),
-    * one for posts and places, etc. etc.
-    *
+   /*
     * TODO some renaming should be done about the server impl and interfaces in the DB server, technically not important
-    * */
+    */
     public static ServerCallback getServerCallback() {
         if (serverCallback == null) {
             synchronized (lock) {

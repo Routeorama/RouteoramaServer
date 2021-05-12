@@ -8,10 +8,6 @@ import com.example.routeoramaserver.networking.ServerConnection;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-/*
-* Login client used to handle auth requests to and from the DB server
-* can later be changed to handle registering and account state as well (deleting and such)
-* */
 public class UserClient implements IUserClient, UserClientCallback {
 
     private IUserServerCallback server;
@@ -22,7 +18,7 @@ public class UserClient implements IUserClient, UserClientCallback {
             UnicastRemoteObject.exportObject(this, 0);
             server = ServerConnection.getServerCallback().getUserServer();
         } catch (RemoteException e) {
-            e.printStackTrace();
+            System.out.println("Could not contact server.");
         }
     }
 
@@ -31,7 +27,7 @@ public class UserClient implements IUserClient, UserClientCallback {
         try {
             return server.Login(username, password);
         } catch (RemoteException e) {
-            e.printStackTrace();
+            System.out.println("Could not contact server when validating login.");
         }
         return null;
     }
@@ -41,7 +37,7 @@ public class UserClient implements IUserClient, UserClientCallback {
         try {
             server.Logout();
         } catch (RemoteException e) {
-            e.printStackTrace();
+            System.out.println("Could not contact server when logging out.");
         }
     }
 
@@ -50,7 +46,7 @@ public class UserClient implements IUserClient, UserClientCallback {
         try {
             return server.Register(user);
         } catch (RemoteException e) {
-            e.printStackTrace();
+            System.out.println("Could not contact server when registering.");
         }
         return false;
     }

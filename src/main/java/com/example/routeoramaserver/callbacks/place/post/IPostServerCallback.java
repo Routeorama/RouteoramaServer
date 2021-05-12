@@ -5,8 +5,6 @@ import com.example.routeoramaserver.models.PostContainer;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.HashMap;
-import java.util.List;
 
 public interface IPostServerCallback extends Remote {
     Post NewPost(Post post) throws RemoteException;

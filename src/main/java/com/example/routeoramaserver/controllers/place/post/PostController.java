@@ -5,8 +5,6 @@ import com.example.routeoramaserver.models.Post;
 import com.example.routeoramaserver.models.PostContainer;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
 
 @RestController
 @RequestMapping("/post")

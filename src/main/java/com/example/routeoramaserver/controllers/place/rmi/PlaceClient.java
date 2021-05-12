@@ -9,10 +9,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-/*
-* Login client used to handle auth requests to and from the DB server
-* can later be changed to handle registering and account state as well (deleting and such)
-* */
+
 public class PlaceClient implements IPlaceClient, PlaceClientCallback {
 
     private IPlaceServerCallback server;
@@ -23,7 +20,7 @@ public class PlaceClient implements IPlaceClient, PlaceClientCallback {
             UnicastRemoteObject.exportObject(this, 0);
             server = ServerConnection.getServerCallback().getPlaceServer();
         } catch (RemoteException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Could not fetch server.");
         }
     }
 
@@ -32,7 +29,7 @@ public class PlaceClient implements IPlaceClient, PlaceClientCallback {
         try {
             return server.NewPlace(place);
         } catch (RemoteException e) {
-            e.printStackTrace();
+            System.out.println("Could not contact server when creating new place.");
         }
         return null;
     }
@@ -42,7 +39,7 @@ public class PlaceClient implements IPlaceClient, PlaceClientCallback {
         try {
             return server.GetPlace(place);
         } catch (RemoteException e) {
-            e.printStackTrace();
+            System.out.println("Could not contact server when getting a place.");
         }
         return null;
     }
@@ -52,7 +49,7 @@ public class PlaceClient implements IPlaceClient, PlaceClientCallback {
         try {
             return server.GetPlace(lat, lng);
         } catch (RemoteException e) {
-            e.printStackTrace();
+            System.out.println("Could not contact server when getting a place.");
         }
         return null;
     }
@@ -62,7 +59,7 @@ public class PlaceClient implements IPlaceClient, PlaceClientCallback {
         try {
             return server.GetPlacesInBounds(bounds);
         } catch (RemoteException e) {
-            e.printStackTrace();
+            System.out.println("Could not contact server when getting places within bounds.");
         }
         return null;
     }

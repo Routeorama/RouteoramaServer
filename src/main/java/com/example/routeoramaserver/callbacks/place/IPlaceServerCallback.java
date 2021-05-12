@@ -7,8 +7,8 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 /*
- * server interface for RMI
- * */
+  server interface for RMI
+*/
 public interface IPlaceServerCallback extends Remote {
     Place NewPlace(Place place) throws RemoteException;
 
