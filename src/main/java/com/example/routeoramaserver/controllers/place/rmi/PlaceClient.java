@@ -63,4 +63,24 @@ public class PlaceClient implements IPlaceClient, PlaceClientCallback {
         }
         return null;
     }
+
+    @Override
+    public boolean FollowThePlace(int placeId, int userId) {
+        try {
+            return server.FollowThePlace(placeId, userId);
+        } catch (RemoteException e) {
+            System.out.println("Could not contact server when trying to follow a place.");
+        }
+        return false;
+    }
+
+    @Override
+    public boolean IsAlreadyFollowed(int placeId, int userId) {
+        try {
+            return server.IsAlreadyFollowed(placeId, userId);
+        } catch (RemoteException e) {
+            System.out.println("Could not contact server when trying to check for the follow.");
+        }
+        return false;
+    }
 }

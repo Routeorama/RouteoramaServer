@@ -2,6 +2,7 @@ package com.example.routeoramaserver.controllers.place.rmi;
 
 import com.example.routeoramaserver.models.Place;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 public interface IPlaceClient {
@@ -13,4 +14,8 @@ public interface IPlaceClient {
     Place GetPlace(Double lat, Double lng);
 
     List<Place> GetPlacesInBounds(List<Double> bounds);
+
+    boolean FollowThePlace(int placeId, int userId);
+
+    boolean IsAlreadyFollowed(int placeId, int userId);
 }

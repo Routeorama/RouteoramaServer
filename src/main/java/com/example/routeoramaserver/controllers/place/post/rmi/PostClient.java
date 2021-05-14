@@ -7,6 +7,7 @@ import com.example.routeoramaserver.models.PostContainer;
 import com.example.routeoramaserver.networking.ServerConnection;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 
 
 public class PostClient implements IPostClient, PostClientCallback {
@@ -24,9 +25,9 @@ public class PostClient implements IPostClient, PostClientCallback {
     }
 
     @Override
-    public Post NewPost(Post post) {
+    public Post NewPost(Post post, List<String> tags) {
         try {
-            return server.NewPost(post);
+            return server.NewPost(post, tags);
         } catch (RemoteException e) {
             System.out.println("Could not contact server when creating new post.");
         }
@@ -61,5 +62,25 @@ public class PostClient implements IPostClient, PostClientCallback {
             System.out.println("Could not contact server when loading more posts.");
         }
         return null;
+    }
+
+    @Override
+    public boolean LikeThePost(int userId, int postId) {
+        try {
+            return server.LikeThePost(userId, postId);
+        } catch (RemoteException e) {
+            System.out.println("Could not contact server when liking a post.");
+        }
+        return false;
+    }
+
+    @Override
+    public boolean IsAlreadyLiked(int userId, int postId) {
+        try {
+            return server.IsAlreadyLiked(userId, postId);
+        } catch (RemoteException e) {
+            System.out.println("Could not contact server when checking if post is liked.");
+        }
+        return false;
     }
 }

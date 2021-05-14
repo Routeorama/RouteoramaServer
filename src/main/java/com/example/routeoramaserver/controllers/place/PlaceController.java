@@ -35,9 +35,21 @@ public class PlaceController {
     /*
     Method for fetching a list of places within bounds (for the markers on the client side).
      */
+
     @PostMapping(value = "/place/bounds", consumes = "application/json", produces = "application/json")
     public List<Place> GetPlacesInBounds(@RequestBody List<Double> bounds){
         return placeClient.GetPlacesInBounds(bounds);
     }
+
+    @PostMapping(value = "/place/follow", consumes = "application/json", produces = "application/json")
+    public boolean FollowThePlace(@RequestBody int[] array){
+        return placeClient.FollowThePlace(array[0], array[1]);
+    }
+
+    @GetMapping(value = "/place/isfollowed", produces = "application/json")
+    public boolean IsAlreadyFollowed(@RequestBody int[] array){
+        return placeClient.IsAlreadyFollowed(array[0], array[1]);
+    }
+
 
 }

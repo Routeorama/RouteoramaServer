@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class RouteoramaServerApplication {
 
     public static void main(String[] args) {
-
         System.setProperty("java.security.policy", "src\\main\\security.policy");
         if (System.getSecurityManager() == null) {
             System.setSecurityManager(new SecurityManager());
