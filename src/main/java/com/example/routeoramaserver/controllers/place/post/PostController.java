@@ -34,10 +34,13 @@ public class PostController {
     public Post NewPost(@RequestBody Post post){
         List<String> tags;
         tags = extractTags(post.getContent());
-        boolean validatePhotoResponse = validatePhoto(post.getPhoto(), post.getUserId());
-        if(!validatePhotoResponse){
-            post.setPhoto(null);
+        if(!(post.getPhoto() == null)){
+            boolean validatePhotoResponse = validatePhoto(post.getPhoto(), post.getUserId());
+            if(!validatePhotoResponse){
+                post.setPhoto(null);
+            }
         }
+        
         return postClient.NewPost(post, tags);
     }
 
