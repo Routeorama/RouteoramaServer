@@ -1,23 +1,28 @@
 package com.example.routeoramaserver.controllers.place.post;
-import com.example.routeoramaserver.controllers.place.post.rmi.IPostClient;
-import com.example.routeoramaserver.controllers.place.post.rmi.PostClient;
-import com.example.routeoramaserver.models.Post;
-import com.example.routeoramaserver.models.PostContainer;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.cloudmersive.client.ScanApi;
 import com.cloudmersive.client.invoker.ApiClient;
 import com.cloudmersive.client.invoker.ApiException;
 import com.cloudmersive.client.invoker.Configuration;
-import com.cloudmersive.client.invoker.auth.*;
+import com.cloudmersive.client.invoker.auth.ApiKeyAuth;
 import com.cloudmersive.client.model.VirusScanResult;
+import com.example.routeoramaserver.controllers.place.post.rmi.IPostClient;
+import com.example.routeoramaserver.controllers.place.post.rmi.PostClient;
+import com.example.routeoramaserver.models.Post;
+import com.example.routeoramaserver.models.PostContainer;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping("/post")
@@ -31,41 +36,41 @@ public class PostController {
     }
 
     @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
-    public Post NewPost(@RequestBody Post post){
+    public Post NewPost(@RequestBody Post post) {
         List<String> tags;
         tags = extractTags(post.getContent());
-        if(!(post.getPhoto() == null)){
+        if (!(post.getPhoto() == null)) {
             boolean validatePhotoResponse = validatePhoto(post.getPhoto(), post.getUserId());
-            if(!validatePhotoResponse){
+            if (!validatePhotoResponse) {
                 post.setPhoto(null);
             }
         }
-        
+
         return postClient.NewPost(post, tags);
     }
 
     @PostMapping(value = "/delete", consumes = "application/json", produces = "application/json")
-    public boolean DeletePost(@RequestBody int postID){
+    public boolean DeletePost(@RequestBody int postID) {
         return postClient.DeletePost(postID);
     }
 
     @PostMapping(value = "/getpost", consumes = "application/json", produces = "application/json")
-    public Post GetPost(@RequestBody int postID){
+    public Post GetPost(@RequestBody int postID) {
         return postClient.GetPost(postID);
     }
 
     @PostMapping(value = "/getposts", consumes = "application/json", produces = "application/json")
-    public PostContainer LoadPostsFromChannel(@RequestBody int[] array){
+    public PostContainer LoadPostsFromChannel(@RequestBody int[] array) {
         return postClient.LoadPostsFromChannel(array[0], array[1]);
     }
 
     @PostMapping(value = "/likepost", consumes = "application/json", produces = "application/json")
-    public boolean LikeThePost(@RequestBody int[] array){
+    public boolean LikeThePost(@RequestBody int[] array) {
         return postClient.LikeThePost(array[0], array[1]);
     }
 
-    @GetMapping(value = "/islikedpost", consumes = "application/json", produces = "application/json")
-    public boolean IsAlreadyLiked(@RequestBody int[] array){
+    @PostMapping(value = "/islikedpost", consumes = "application/json", produces = "application/json")
+    public boolean IsAlreadyLiked(@RequestBody int[] array) {
         return postClient.IsAlreadyLiked(array[0], array[1]);
     }
 
@@ -81,7 +86,7 @@ public class PostController {
             hashTagList.add(m.group());
         }
 
-        if(!hashTagList.isEmpty()) {
+        if (!hashTagList.isEmpty()) {
             for (String hashtag : hashTagList) {
                 hashtag = hashtag.substring(1);
             }
@@ -104,7 +109,7 @@ public class PostController {
             OutputStream os = new FileOutputStream(file);
             os.write(photo);
             os.close();
-            if(file.exists()){
+            if (file.exists()) {
                 VirusScanResult result = apiInstance.scanFile(file);
                 scanResult = result.isCleanResult();
                 file.delete();

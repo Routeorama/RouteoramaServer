@@ -11,6 +11,6 @@ public interface IPostClient {
     boolean DeletePost(int postID);
     Post GetPost(int postID);
     PostContainer LoadPostsFromChannel(int placeID, int postID);
-    boolean LikeThePost(int userId, int postId);
-    boolean IsAlreadyLiked(int userId, int postId);
+    boolean LikeThePost(int postId, int userId);
+    boolean IsAlreadyLiked(int postId, int userId);
 }

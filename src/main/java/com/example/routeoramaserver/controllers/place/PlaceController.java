@@ -18,17 +18,17 @@ public class PlaceController {
     }
 
     @PostMapping(value = "/place", consumes = "application/json", produces = "application/json")
-    public Place NewPlace(@RequestBody Place place){
+    public Place NewPlace(@RequestBody Place place) {
         return placeClient.NewPlace(place);
     }
 
     @GetMapping(value = "/place/{name}", produces = "application/json")
-    public Place GetPlace(@PathVariable("name") String name){
+    public Place GetPlace(@PathVariable("name") String name) {
         return placeClient.GetPlace(name);
     }
 
     @GetMapping(value = "/place?lat={lat}&lng={lng}", produces = "application/json")
-    public Place GetPlace(@PathVariable("lat") Double lat, @PathVariable("lng") Double lng){
+    public Place GetPlace(@PathVariable("lat") Double lat, @PathVariable("lng") Double lng) {
         return placeClient.GetPlace(lat, lng);
     }
 
@@ -37,17 +37,17 @@ public class PlaceController {
      */
 
     @PostMapping(value = "/place/bounds", consumes = "application/json", produces = "application/json")
-    public List<Place> GetPlacesInBounds(@RequestBody List<Double> bounds){
+    public List<Place> GetPlacesInBounds(@RequestBody List<Double> bounds) {
         return placeClient.GetPlacesInBounds(bounds);
     }
 
     @PostMapping(value = "/place/follow", consumes = "application/json", produces = "application/json")
-    public boolean FollowThePlace(@RequestBody int[] array){
+    public boolean FollowThePlace(@RequestBody int[] array) {
         return placeClient.FollowThePlace(array[0], array[1]);
     }
 
-    @GetMapping(value = "/place/isfollowed", produces = "application/json")
-    public boolean IsAlreadyFollowed(@RequestBody int[] array){
+    @PostMapping(value = "/place/isfollowed",consumes = "application/json", produces = "application/json")
+    public boolean IsAlreadyFollowed(@RequestBody int[] array) {
         return placeClient.IsAlreadyFollowed(array[0], array[1]);
     }
 

@@ -65,9 +65,9 @@ public class PostClient implements IPostClient, PostClientCallback {
     }
 
     @Override
-    public boolean LikeThePost(int userId, int postId) {
+    public boolean LikeThePost(int postId, int userId) {
         try {
-            return server.LikeThePost(userId, postId);
+            return server.LikeThePost(postId, userId);
         } catch (RemoteException e) {
             System.out.println("Could not contact server when liking a post.");
         }
@@ -75,9 +75,9 @@ public class PostClient implements IPostClient, PostClientCallback {
     }
 
     @Override
-    public boolean IsAlreadyLiked(int userId, int postId) {
+    public boolean IsAlreadyLiked(int postId, int userId) {
         try {
-            return server.IsAlreadyLiked(userId, postId);
+            return server.IsAlreadyLiked(postId, userId);
         } catch (RemoteException e) {
             System.out.println("Could not contact server when checking if post is liked.");
         }
