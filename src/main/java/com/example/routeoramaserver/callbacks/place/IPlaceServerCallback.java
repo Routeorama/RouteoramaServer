@@ -18,7 +18,7 @@ public interface IPlaceServerCallback extends Remote {
 
     List<Place> GetPlacesInBounds(List<Double> bounds) throws RemoteException;
 
-    boolean FollowThePlace(int placeId, int userId) throws RemoteException;
-
+    void FollowThePlace(int placeId, int userId) throws RemoteException;
+    void UnfollowThePlace(int placeId, int userId) throws RemoteException;
     boolean IsAlreadyFollowed(int placeId, int userId) throws RemoteException;
 }

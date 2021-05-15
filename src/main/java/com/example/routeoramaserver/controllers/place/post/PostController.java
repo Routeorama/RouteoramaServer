@@ -6,6 +6,7 @@ import com.cloudmersive.client.invoker.ApiException;
 import com.cloudmersive.client.invoker.Configuration;
 import com.cloudmersive.client.invoker.auth.ApiKeyAuth;
 import com.cloudmersive.client.model.VirusScanResult;
+
 import com.example.routeoramaserver.controllers.place.post.rmi.IPostClient;
 import com.example.routeoramaserver.controllers.place.post.rmi.PostClient;
 import com.example.routeoramaserver.models.Post;
@@ -64,15 +65,21 @@ public class PostController {
         return postClient.LoadPostsFromChannel(array[0], array[1]);
     }
 
-    @PostMapping(value = "/likepost", consumes = "application/json", produces = "application/json")
-    public boolean LikeThePost(@RequestBody int[] array) {
-        return postClient.LikeThePost(array[0], array[1]);
+    @PostMapping(value = "/likepost", consumes = "application/json")
+    public void LikeThePost(@RequestBody int[] array) {
+        postClient.LikeThePost(array[0], array[1]);
     }
 
     @PostMapping(value = "/islikedpost", consumes = "application/json", produces = "application/json")
     public boolean IsAlreadyLiked(@RequestBody int[] array) {
         return postClient.IsAlreadyLiked(array[0], array[1]);
     }
+
+    @PostMapping(value = "/unlikethepost", consumes = "application/json")
+    public void UnlikeThePost(@RequestBody int[] array){
+        postClient.UnlikeThePost(array[0], array[1]);
+    }
+
 
 
     /*

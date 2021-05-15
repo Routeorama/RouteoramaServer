@@ -42,14 +42,17 @@ public class PlaceController {
     }
 
     @PostMapping(value = "/place/follow", consumes = "application/json", produces = "application/json")
-    public boolean FollowThePlace(@RequestBody int[] array) {
-        return placeClient.FollowThePlace(array[0], array[1]);
+    public void FollowThePlace(@RequestBody int[] array) {
+        placeClient.FollowThePlace(array[0], array[1]);
+    }
+
+    @PostMapping(value = "/place/unfollow", consumes = "application/json")
+    public void UnfollowThePlace(@RequestBody int[] array) {
+        placeClient.UnfollowThePlace(array[0], array[1]);
     }
 
     @PostMapping(value = "/place/isfollowed",consumes = "application/json", produces = "application/json")
     public boolean IsAlreadyFollowed(@RequestBody int[] array) {
         return placeClient.IsAlreadyFollowed(array[0], array[1]);
     }
-
-
 }

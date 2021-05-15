@@ -65,13 +65,21 @@ public class PostClient implements IPostClient, PostClientCallback {
     }
 
     @Override
-    public boolean LikeThePost(int postId, int userId) {
+    public void LikeThePost(int postId, int userId) {
         try {
-            return server.LikeThePost(postId, userId);
+            server.LikeThePost(postId, userId);
         } catch (RemoteException e) {
             System.out.println("Could not contact server when liking a post.");
         }
-        return false;
+    }
+
+    @Override
+    public void UnlikeThePost(int postId, int userId) {
+        try {
+            server.UnlikeThePost(postId, userId);
+        } catch (RemoteException e) {
+            System.out.println("Could not contact server when checking if post is liked.");
+        }
     }
 
     @Override
