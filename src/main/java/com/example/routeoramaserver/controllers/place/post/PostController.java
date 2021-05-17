@@ -81,14 +81,17 @@ public class PostController {
     }
 
     @PostMapping(value = "/getfeed", consumes = "application/json", produces = "application/json")
-    public PostContainer GetFeed(@RequestBody int userId){
-        return postClient.GetFeed(userId);
+    public PostContainer GetPostsForNewsFeed(@RequestBody int userId){
+        return postClient.GetPostsForNewsFeed(userId);
     }
 
     @PostMapping(value = "/loadfeed", consumes = "application/json", produces = "application/json")
-    public PostContainer LoadFeed(@RequestBody int[] array){
-        return postClient.LoadFeed(array[0], array[1]);
+    public PostContainer LoadMorePostsForNewsFeed(@RequestBody int[] array){
+        return postClient.LoadMorePostsForNewsFeed(array[0], array[1]);
     }
+
+
+
 
     /*
     Logic methods
@@ -101,12 +104,14 @@ public class PostController {
             hashTagList.add(m.group());
         }
 
+        ArrayList<String> tagList = new ArrayList<String>();
         if (!hashTagList.isEmpty()) {
             for (String hashtag : hashTagList) {
-                hashtag = hashtag.substring(1);
+                tagList.add(hashtag.substring(1));
             }
         }
-        return hashTagList;
+
+        return tagList;
     }
 
     private boolean validatePhoto(byte[] photo, int userId) {
@@ -119,7 +124,7 @@ public class PostController {
 
             ScanApi apiInstance = new ScanApi();
 
-            String FILEPATH = "src\\main\\java\\fileContainerDirectory\\" + userId + ".txt";
+            String FILEPATH = "src\\main\\java\\com\\example\\routeoramaserver\\fileContainerDirectory\\"+userId+".txt";
             File file = new File(FILEPATH);
             OutputStream os = new FileOutputStream(file);
             os.write(photo);

@@ -15,6 +15,6 @@ public interface IPostClient {
     void LikeThePost(int postId, int userId);
     void UnlikeThePost(int postId, int userId);
     boolean IsAlreadyLiked(int postId, int userId);
-    PostContainer GetFeed(int userId);
-    PostContainer LoadFeed(int i, int i1);
+    PostContainer GetPostsForNewsFeed(int userId);
+    PostContainer LoadMorePostsForNewsFeed(int userId, int postId);
 }
