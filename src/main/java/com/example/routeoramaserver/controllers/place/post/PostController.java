@@ -80,7 +80,15 @@ public class PostController {
         postClient.UnlikeThePost(array[0], array[1]);
     }
 
+    @PostMapping(value = "/getfeed", consumes = "application/json", produces = "application/json")
+    public PostContainer GetFeed(@RequestBody int userId){
+        return postClient.GetFeed(userId);
+    }
 
+    @PostMapping(value = "/loadfeed", consumes = "application/json", produces = "application/json")
+    public PostContainer LoadFeed(@RequestBody int[] array){
+        return postClient.LoadFeed(array[0], array[1]);
+    }
 
     /*
     Logic methods

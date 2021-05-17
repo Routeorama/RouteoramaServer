@@ -91,4 +91,24 @@ public class PostClient implements IPostClient, PostClientCallback {
         }
         return false;
     }
+
+    @Override
+    public PostContainer GetFeed(int userId) {
+        try{
+            return server.GetFeed(userId);
+        } catch (RemoteException e){
+            System.out.println("Could not get feed from server");
+        }
+        return null;
+    }
+
+    @Override
+    public PostContainer LoadFeed(int userId, int postId) {
+        try{
+            return server.LoadFeed(userId, postId);
+        } catch (RemoteException e){
+            System.out.println("Could not load feed from server");
+        }
+        return null;
+    }
 }
