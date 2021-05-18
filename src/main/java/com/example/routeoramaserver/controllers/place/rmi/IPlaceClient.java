@@ -18,4 +18,8 @@ public interface IPlaceClient {
     void FollowThePlace(int placeId, int userId);
     void UnfollowThePlace(int placeId, int userId);
     boolean IsAlreadyFollowed(int placeId, int userId);
+
+    List<String> GetMostFollowedPlaces();
+
+    List<String> GetMostLikedPlaces();
 }

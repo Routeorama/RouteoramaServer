@@ -1,12 +1,7 @@
 package com.example.routeoramaserver.controllers.place.post;
 
-import com.cloudmersive.client.ScanApi;
-import com.cloudmersive.client.invoker.ApiClient;
-import com.cloudmersive.client.invoker.ApiException;
-import com.cloudmersive.client.invoker.Configuration;
-import com.cloudmersive.client.invoker.auth.ApiKeyAuth;
-import com.cloudmersive.client.model.VirusScanResult;
-
+import com.example.routeoramaserver.controllers.place.post.model.IPostModel;
+import com.example.routeoramaserver.controllers.place.post.model.PostModel;
 import com.example.routeoramaserver.controllers.place.post.rmi.IPostClient;
 import com.example.routeoramaserver.controllers.place.post.rmi.PostClient;
 import com.example.routeoramaserver.models.Post;
@@ -16,38 +11,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 @RestController
 @RequestMapping("/post")
 public class PostController {
     private IPostClient postClient;
-
+    private IPostModel postModel;
 
     public PostController() {
         postClient = new PostClient();
+        postModel = new PostModel();
         postClient.Start();
     }
 
     @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
     public Post NewPost(@RequestBody Post post) {
-        List<String> tags;
-        tags = extractTags(post.getContent());
-        if (!(post.getPhoto() == null)) {
-            boolean validatePhotoResponse = validatePhoto(post.getPhoto(), post.getUserId());
-            if (!validatePhotoResponse) {
-                post.setPhoto(null);
-            }
-        }
-
-        return postClient.NewPost(post, tags);
+        //this might need to be separated into variables bcs they aren't async
+        return postClient.NewPost(postModel.ValidatePost(post), postModel.GetTags(post));
     }
 
     @PostMapping(value = "/delete", consumes = "application/json", produces = "application/json")
@@ -76,70 +55,19 @@ public class PostController {
     }
 
     @PostMapping(value = "/unlikethepost", consumes = "application/json")
-    public void UnlikeThePost(@RequestBody int[] array){
+    public void UnlikeThePost(@RequestBody int[] array) {
         postClient.UnlikeThePost(array[0], array[1]);
     }
 
     @PostMapping(value = "/getfeed", consumes = "application/json", produces = "application/json")
-    public PostContainer GetPostsForNewsFeed(@RequestBody int userId){
+    public PostContainer GetPostsForNewsFeed(@RequestBody int userId) {
         return postClient.GetPostsForNewsFeed(userId);
     }
 
     @PostMapping(value = "/loadfeed", consumes = "application/json", produces = "application/json")
-    public PostContainer LoadMorePostsForNewsFeed(@RequestBody int[] array){
+    public PostContainer LoadMorePostsForNewsFeed(@RequestBody int[] array) {
         return postClient.LoadMorePostsForNewsFeed(array[0], array[1]);
     }
 
-
-
-
-    /*
-    Logic methods
-     */
-
-    private List<String> extractTags(String content) {
-        ArrayList<String> hashTagList = new ArrayList<String>();
-        Matcher m = Pattern.compile("(#\\w+)\\b").matcher(content);
-        while (m.find()) {
-            hashTagList.add(m.group());
-        }
-
-        ArrayList<String> tagList = new ArrayList<String>();
-        if (!hashTagList.isEmpty()) {
-            for (String hashtag : hashTagList) {
-                tagList.add(hashtag.substring(1));
-            }
-        }
-
-        return tagList;
-    }
-
-    private boolean validatePhoto(byte[] photo, int userId) {
-        try {
-            boolean scanResult;
-            ApiClient defaultClient = Configuration.getDefaultApiClient();
-
-            ApiKeyAuth Apikey = (ApiKeyAuth) defaultClient.getAuthentication("Apikey");
-            Apikey.setApiKey("1cd184fc-369b-428d-ae1d-f389334454bd");
-
-            ScanApi apiInstance = new ScanApi();
-
-            String FILEPATH = "src\\main\\java\\com\\example\\routeoramaserver\\fileContainerDirectory\\"+userId+".txt";
-            File file = new File(FILEPATH);
-            OutputStream os = new FileOutputStream(file);
-            os.write(photo);
-            os.close();
-            if (file.exists()) {
-                VirusScanResult result = apiInstance.scanFile(file);
-                scanResult = result.isCleanResult();
-                file.delete();
-
-                return scanResult;
-            }
-        } catch (IOException | ApiException e) {
-            System.out.println("Problem occurred while validating photo " + e);
-        }
-        return false;
-    }
 
 }

@@ -55,4 +55,15 @@ public class PlaceController {
     public boolean IsAlreadyFollowed(@RequestBody int[] array) {
         return placeClient.IsAlreadyFollowed(array[0], array[1]);
     }
+
+    @PostMapping(value = "/place/getmostfollowed",consumes = "application/json", produces = "application/json")
+    public List<String> GetMostFollowedPlaces(){
+        return placeClient.GetMostFollowedPlaces();
+    }
+
+    @PostMapping(value = "/place/getmostliked",consumes = "application/json", produces = "application/json")
+    public List<String> GetMostLikedPlaces(){
+        return placeClient.GetMostLikedPlaces();
+    }
+
 }

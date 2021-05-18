@@ -91,4 +91,24 @@ public class PlaceClient implements IPlaceClient, PlaceClientCallback {
         }
         return false;
     }
+
+    @Override
+    public List<String> GetMostFollowedPlaces() {
+        try{
+            return server.GetMostFollowedPlaces();
+        } catch (Exception e){
+            System.out.println("Could not contact server when trying to get most followed places");
+        }
+         return null;
+    }
+
+    @Override
+    public List<String> GetMostLikedPlaces() {
+        try{
+            return server.GetMostLikedPlaces();
+        } catch (Exception e){
+            System.out.println("Could not contact server when trying to get most liked places");
+        }
+        return null;
+    }
 }
