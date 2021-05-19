@@ -68,6 +68,4 @@ public class PostController {
     public PostContainer LoadMorePostsForNewsFeed(@RequestBody int[] array) {
         return postClient.LoadMorePostsForNewsFeed(array[0], array[1]);
     }
-
-
 }

@@ -32,10 +32,7 @@ public class PlaceController {
         return placeClient.GetPlace(lat, lng);
     }
 
-    /*
-    Method for fetching a list of places within bounds (for the markers on the client side).
-     */
-
+    //Method for fetching a list of places within bounds (for the markers on the client side).
     @PostMapping(value = "/place/bounds", consumes = "application/json", produces = "application/json")
     public List<Place> GetPlacesInBounds(@RequestBody List<Double> bounds) {
         return placeClient.GetPlacesInBounds(bounds);
@@ -56,12 +53,12 @@ public class PlaceController {
         return placeClient.IsAlreadyFollowed(array[0], array[1]);
     }
 
-    @PostMapping(value = "/place/getmostfollowed", produces = "application/json")
+    @GetMapping(value = "/place/getmostfollowed", produces = "application/json")
     public List<String> GetMostFollowedPlaces(){
         return placeClient.GetMostFollowedPlaces();
     }
 
-    @PostMapping(value = "/place/getmostliked", produces = "application/json")
+    @GetMapping(value = "/place/getmostliked", produces = "application/json")
     public List<String> GetMostLikedPlaces(){
         return placeClient.GetMostLikedPlaces();
     }
