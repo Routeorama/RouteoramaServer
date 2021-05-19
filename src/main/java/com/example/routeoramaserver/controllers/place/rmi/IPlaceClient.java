@@ -22,4 +22,6 @@ public interface IPlaceClient {
     List<String> GetMostFollowedPlaces();
 
     List<String> GetMostLikedPlaces();
+
+    List<Place> SearchForPlace(String searchString);
 }

@@ -66,4 +66,8 @@ public class PlaceController {
         return placeClient.GetMostLikedPlaces();
     }
 
+    @PostMapping(value = "/place/search", produces = "application/json", consumes = "application/json")
+    public List<Place> SearchForPlace(@RequestBody String name){
+        return placeClient.SearchForPlace(name);
+    }
 }
