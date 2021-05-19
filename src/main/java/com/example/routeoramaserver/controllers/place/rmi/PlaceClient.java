@@ -113,9 +113,9 @@ public class PlaceClient implements IPlaceClient, PlaceClientCallback {
     }
 
     @Override
-    public List<Place> SearchForPlace(String name) {
+    public List<Place> SearchForPlaces(String filter) {
         try{
-            return server.SearchForPlace(name);
+            return server.SearchForPlaces(filter);
         } catch (Exception e){
             System.out.println("Could not contact server when trying to search for a place");
         }

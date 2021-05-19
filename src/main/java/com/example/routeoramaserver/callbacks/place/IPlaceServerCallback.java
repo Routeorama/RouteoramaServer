@@ -26,5 +26,5 @@ public interface IPlaceServerCallback extends Remote {
 
     List<String> GetMostLikedPlaces() throws RemoteException;
 
-    List<Place> SearchForPlace(String name);
+    List<Place> SearchForPlaces(String filter) throws RemoteException;
 }

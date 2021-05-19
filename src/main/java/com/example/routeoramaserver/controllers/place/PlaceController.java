@@ -67,7 +67,7 @@ public class PlaceController {
     }
 
     @PostMapping(value = "/place/search", produces = "application/json", consumes = "application/json")
-    public List<Place> SearchForPlace(@RequestBody String name){
-        return placeClient.SearchForPlace(name);
+    public List<Place> SearchForPlaces(@RequestBody String filter){
+        return placeClient.SearchForPlaces(filter);
     }
 }
