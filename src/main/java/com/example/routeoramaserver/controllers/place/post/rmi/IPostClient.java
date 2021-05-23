@@ -22,5 +22,5 @@ public interface IPostClient {
     void Comment(Comment comment);
     void DeleteComment(Comment comment);
     CommentContainer GetCommentForPost(int postId);
-    CommentContainer LoadMoreComments(int postId, Comment lastComment);
+    CommentContainer LoadMoreComments(Comment lastComment);
 }

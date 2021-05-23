@@ -71,12 +71,12 @@ public class PostController {
         return postClient.LoadMorePostsForNewsFeed(array[0], array[1]);
     }
 
-    @PostMapping(value = "/comment", consumes = "application/json", produces = "application/json")
+    @PostMapping(value = "/comment", consumes = "application/json")
     public void Comment(@RequestBody Comment comment) {
         postClient.Comment(comment);
     }
 
-    @PostMapping(value = "/deletecomment", consumes = "application/json", produces = "application/json")
+    @PostMapping(value = "/deletecomment", consumes = "application/json")
     public void DeleteComment(@RequestBody Comment comment) {
         postClient.DeleteComment(comment);
     }
@@ -87,7 +87,7 @@ public class PostController {
     }
 
     @PostMapping(value = "/loadmorecomments", consumes = "application/json", produces = "application/json")
-    public CommentContainer LoadMoreComments(@RequestBody int postId,@RequestBody Comment lastComment) {
-        return postClient.LoadMoreComments(postId, lastComment);
+    public CommentContainer LoadMoreComments(@RequestBody Comment lastComment) {
+        return postClient.LoadMoreComments(lastComment);
     }
 }
