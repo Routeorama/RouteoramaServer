@@ -1,5 +1,7 @@
 package com.example.routeoramaserver.controllers.place.post.rmi;
 
+import com.example.routeoramaserver.models.Comment;
+import com.example.routeoramaserver.models.CommentContainer;
 import com.example.routeoramaserver.models.Post;
 import com.example.routeoramaserver.models.PostContainer;
 
@@ -17,4 +19,8 @@ public interface IPostClient {
     boolean IsAlreadyLiked(int postId, int userId);
     PostContainer GetPostsForNewsFeed(int userId);
     PostContainer LoadMorePostsForNewsFeed(int userId, int postId);
+    void Comment(Comment comment);
+    void DeleteComment(Comment comment);
+    CommentContainer GetCommentForPost(int postId);
+    CommentContainer LoadMoreComments(int postId, Comment lastComment);
 }

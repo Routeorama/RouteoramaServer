@@ -4,6 +4,8 @@ import com.example.routeoramaserver.controllers.place.post.model.IPostModel;
 import com.example.routeoramaserver.controllers.place.post.model.PostModel;
 import com.example.routeoramaserver.controllers.place.post.rmi.IPostClient;
 import com.example.routeoramaserver.controllers.place.post.rmi.PostClient;
+import com.example.routeoramaserver.models.Comment;
+import com.example.routeoramaserver.models.CommentContainer;
 import com.example.routeoramaserver.models.Post;
 import com.example.routeoramaserver.models.PostContainer;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -67,5 +69,25 @@ public class PostController {
     @PostMapping(value = "/loadfeed", consumes = "application/json", produces = "application/json")
     public PostContainer LoadMorePostsForNewsFeed(@RequestBody int[] array) {
         return postClient.LoadMorePostsForNewsFeed(array[0], array[1]);
+    }
+
+    @PostMapping(value = "/comment", consumes = "application/json", produces = "application/json")
+    public void Comment(@RequestBody Comment comment) {
+        postClient.Comment(comment);
+    }
+
+    @PostMapping(value = "/deletecomment", consumes = "application/json", produces = "application/json")
+    public void DeleteComment(@RequestBody Comment comment) {
+        postClient.DeleteComment(comment);
+    }
+
+    @PostMapping(value = "/getcommentforpost", consumes = "application/json", produces = "application/json")
+    public CommentContainer GetCommentForPost(@RequestBody int postId) {
+        return postClient.GetCommentForPost(postId);
+    }
+
+    @PostMapping(value = "/loadmorecomments", consumes = "application/json", produces = "application/json")
+    public CommentContainer LoadMoreComments(@RequestBody int postId,@RequestBody Comment lastComment) {
+        return postClient.LoadMoreComments(postId, lastComment);
     }
 }

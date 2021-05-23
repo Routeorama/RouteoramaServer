@@ -2,6 +2,8 @@ package com.example.routeoramaserver.controllers.place.post.rmi;
 
 import com.example.routeoramaserver.callbacks.place.post.IPostServerCallback;
 import com.example.routeoramaserver.callbacks.place.post.PostClientCallback;
+import com.example.routeoramaserver.models.Comment;
+import com.example.routeoramaserver.models.CommentContainer;
 import com.example.routeoramaserver.models.Post;
 import com.example.routeoramaserver.models.PostContainer;
 import com.example.routeoramaserver.networking.ServerConnection;
@@ -108,6 +110,44 @@ public class PostClient implements IPostClient, PostClientCallback {
             return server.LoadMorePostsForNewsFeed(userId, postId);
         } catch (RemoteException e){
             System.out.println("Could not load feed from server");
+        }
+        return null;
+    }
+
+    @Override
+    public void Comment(Comment comment) {
+        try{
+            server.Comment(comment);
+        } catch (RemoteException e){
+            System.out.println("Could not comment");
+        }
+    }
+
+    @Override
+    public void DeleteComment(Comment comment) {
+        try{
+            server.DeleteComment(comment);
+        } catch (RemoteException e){
+            System.out.println("Could not delete comment");
+        }
+    }
+
+    @Override
+    public CommentContainer GetCommentForPost(int postId) {
+        try{
+            return server.GetCommentForPost(postId);
+        } catch (RemoteException e){
+            System.out.println("Could not fetch comment for post");
+        }
+        return null;
+    }
+
+    @Override
+    public CommentContainer LoadMoreComments(int postId, Comment lastComment) {
+        try{
+            return server.LoadMoreComments(postId, lastComment);
+        } catch (RemoteException e){
+            System.out.println("Could not fetch more comments for post");
         }
         return null;
     }
