@@ -5,6 +5,6 @@ import com.example.routeoramaserver.models.User;
 public interface IUserClient {
     void Start();
     User Login(String username, String password);
-    void Logout();
     boolean Register(User user);
+    String UpdateUser(User user);
 }

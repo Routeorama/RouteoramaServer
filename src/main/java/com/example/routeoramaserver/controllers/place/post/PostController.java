@@ -27,7 +27,6 @@ public class PostController {
 
     @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
     public Post NewPost(@RequestBody Post post) {
-        //this might need to be separated into variables bcs they aren't async
         return postClient.NewPost(postModel.ValidatePost(post), postModel.GetTags(post));
     }
 
@@ -89,5 +88,10 @@ public class PostController {
     @PostMapping(value = "/loadmorecomments", consumes = "application/json", produces = "application/json")
     public CommentContainer LoadMoreComments(@RequestBody Comment lastComment) {
         return postClient.LoadMoreComments(lastComment);
+    }
+
+    @PostMapping(value = "/commentcount", consumes = "application/json", produces = "application/json")
+    public int GetCommentCount(@RequestBody int postId) {
+        return postClient.GetCommentCount(postId);
     }
 }

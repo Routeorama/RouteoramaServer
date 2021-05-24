@@ -11,7 +11,6 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-
 public class PostClient implements IPostClient, PostClientCallback {
 
     private IPostServerCallback server;
@@ -99,7 +98,7 @@ public class PostClient implements IPostClient, PostClientCallback {
         try{
             return server.GetPostsForNewsFeed(userId);
         } catch (RemoteException e){
-            System.out.println("Could not get feed from server");
+            System.out.println("Could not get posts for feed from server.");
         }
         return null;
     }
@@ -109,7 +108,7 @@ public class PostClient implements IPostClient, PostClientCallback {
         try{
             return server.LoadMorePostsForNewsFeed(userId, postId);
         } catch (RemoteException e){
-            System.out.println("Could not load feed from server");
+            System.out.println("Could not load more posts for feed from server.");
         }
         return null;
     }
@@ -119,7 +118,7 @@ public class PostClient implements IPostClient, PostClientCallback {
         try{
             server.Comment(comment);
         } catch (RemoteException e){
-            System.out.println("Could not comment");
+            System.out.println("Could not comment the post.");
         }
     }
 
@@ -128,7 +127,7 @@ public class PostClient implements IPostClient, PostClientCallback {
         try{
             server.DeleteComment(comment);
         } catch (RemoteException e){
-            System.out.println("Could not delete comment");
+            System.out.println("Could not delete the comment.");
         }
     }
 
@@ -137,7 +136,7 @@ public class PostClient implements IPostClient, PostClientCallback {
         try{
             return server.GetCommentForPost(postId);
         } catch (RemoteException e){
-            System.out.println("Could not fetch comment for post"  + e );
+            System.out.println("Could not fetch comments for post.");
         }
         return null;
     }
@@ -147,8 +146,18 @@ public class PostClient implements IPostClient, PostClientCallback {
         try{
             return server.LoadMoreComments(lastComment);
         } catch (RemoteException e){
-            System.out.println("Could not fetch more comments for post");
+            System.out.println("Could not fetch more comments for post.");
         }
         return null;
+    }
+
+    @Override
+    public int GetCommentCount(int postId) {
+        try{
+            return server.GetCommentCount(postId);
+        } catch (RemoteException e){
+            System.out.println("Could not fetch comment count.");
+        }
+        return 0;
     }
 }

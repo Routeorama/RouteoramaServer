@@ -1,7 +1,6 @@
 package com.example.routeoramaserver.models;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Objects;
 

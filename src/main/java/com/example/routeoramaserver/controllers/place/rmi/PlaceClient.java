@@ -4,11 +4,9 @@ import com.example.routeoramaserver.callbacks.place.PlaceClientCallback;
 import com.example.routeoramaserver.models.Place;
 import com.example.routeoramaserver.callbacks.place.IPlaceServerCallback;
 import com.example.routeoramaserver.networking.ServerConnection;
-
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
-
 
 public class PlaceClient implements IPlaceClient, PlaceClientCallback {
 
@@ -49,7 +47,7 @@ public class PlaceClient implements IPlaceClient, PlaceClientCallback {
         try {
             return server.GetPlace(lat, lng);
         } catch (RemoteException e) {
-            System.out.println("Could not contact server when getting a place.");
+            System.out.println("Could not contact server when getting a place by lat and lng.");
         }
         return null;
     }
@@ -78,7 +76,7 @@ public class PlaceClient implements IPlaceClient, PlaceClientCallback {
         try {
             server.UnfollowThePlace(placeId, userId);
         } catch (RemoteException e) {
-            System.out.println("Could not contact server when trying to follow a place.");
+            System.out.println("Could not contact server when trying to unfollow a place.");
         }
     }
 
@@ -97,7 +95,7 @@ public class PlaceClient implements IPlaceClient, PlaceClientCallback {
         try{
             return server.GetMostFollowedPlaces();
         } catch (Exception e){
-            System.out.println("Could not contact server when trying to get most followed places");
+            System.out.println("Could not contact server when trying to get most followed places.");
         }
          return null;
     }
@@ -107,7 +105,7 @@ public class PlaceClient implements IPlaceClient, PlaceClientCallback {
         try{
             return server.GetMostLikedPlaces();
         } catch (Exception e){
-            System.out.println("Could not contact server when trying to get most liked places");
+            System.out.println("Could not contact server when trying to get most liked places.");
         }
         return null;
     }
@@ -117,7 +115,7 @@ public class PlaceClient implements IPlaceClient, PlaceClientCallback {
         try{
             return server.SearchForPlaces(filter);
         } catch (Exception e){
-            System.out.println("Could not contact server when trying to search for a place");
+            System.out.println("Could not contact server when trying to search for a place.");
         }
         return null;
     }

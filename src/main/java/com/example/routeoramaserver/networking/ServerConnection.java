@@ -1,7 +1,6 @@
 package com.example.routeoramaserver.networking;
 
 import com.example.routeoramaserver.networking.callbacks.ServerCallback;
-
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;

@@ -4,7 +4,6 @@ import com.example.routeoramaserver.controllers.place.rmi.IPlaceClient;
 import com.example.routeoramaserver.controllers.place.rmi.PlaceClient;
 import com.example.routeoramaserver.models.Place;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController

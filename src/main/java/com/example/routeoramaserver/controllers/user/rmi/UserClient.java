@@ -4,7 +4,6 @@ import com.example.routeoramaserver.callbacks.user.UserClientCallback;
 import com.example.routeoramaserver.callbacks.user.IUserServerCallback;
 import com.example.routeoramaserver.models.User;
 import com.example.routeoramaserver.networking.ServerConnection;
-
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
@@ -33,15 +32,6 @@ public class UserClient implements IUserClient, UserClientCallback {
     }
 
     @Override
-    public void Logout() {
-        try {
-            server.Logout();
-        } catch (RemoteException e) {
-            System.out.println("Could not contact server when logging out.");
-        }
-    }
-
-    @Override
     public boolean Register(User user) {
         try {
             return server.Register(user);
@@ -49,5 +39,15 @@ public class UserClient implements IUserClient, UserClientCallback {
             System.out.println("Could not contact server when registering.");
         }
         return false;
+    }
+
+    @Override
+    public String UpdateUser(User user) {
+        try {
+            return server.UpdateUser(user);
+        } catch (RemoteException e) {
+            System.out.println("Could not update user information.");
+        }
+        return null;
     }
 }

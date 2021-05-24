@@ -1,5 +1,7 @@
 package com.example.routeoramaserver.controllers.user;
 
+import com.example.routeoramaserver.controllers.user.model.IUserModel;
+import com.example.routeoramaserver.controllers.user.model.UserModel;
 import com.example.routeoramaserver.controllers.user.rmi.IUserClient;
 import com.example.routeoramaserver.controllers.user.rmi.UserClient;
 import com.example.routeoramaserver.models.User;
@@ -9,9 +11,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 public class UserController {
     private IUserClient userClient;
+    private IUserModel userModel;
 
     public UserController(){
         userClient = new UserClient();
+        userModel = new UserModel();
         userClient.Start();
     }
 
@@ -20,14 +24,13 @@ public class UserController {
         return userClient.Login(user.getUsername(), user.getPassword());
     }
 
-    //TODO is it needed?
-    @PostMapping("/logout")
-    public void Logout(){
-        userClient.Logout();
-    }
-
     @PostMapping(value = "/register", consumes = "application/json", produces = "application/json")
     public boolean Register(@RequestBody User user){
-        return userClient.Register(user);
+        return userClient.Register(userModel.ValidateUser(user));
+    }
+
+    @PostMapping(value = "/updateuser", consumes = "application/json", produces = "application/json")
+    public String UpdateUser(@RequestBody User user){
+        return userClient.UpdateUser(userModel.ValidateUser(user));
     }
 }
