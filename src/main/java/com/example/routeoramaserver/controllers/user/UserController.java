@@ -29,6 +29,7 @@ public class UserController {
         return userClient.Register(userModel.ValidateUser(user));
     }
 
+
     @PostMapping(value = "/updateuser", consumes = "application/json", produces = "application/json")
     public String UpdateUser(@RequestBody User user){
         return userClient.UpdateUser(userModel.ValidateUser(user));
