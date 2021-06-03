@@ -11,13 +11,8 @@ public class ServerConnection {
     private static ServerCallback serverCallback;
     private static final Lock lock = new ReentrantLock();
 
-    private ServerConnection() {
+    private ServerConnection() {}
 
-    }
-
-   /*
-    * TODO some renaming should be done about the server impl and interfaces in the DB server, technically not important
-    */
     public static ServerCallback getServerCallback() {
         if (serverCallback == null) {
             synchronized (lock) {
@@ -30,7 +25,6 @@ public class ServerConnection {
                 }
             }
         }
-
         return serverCallback;
     }
 }
